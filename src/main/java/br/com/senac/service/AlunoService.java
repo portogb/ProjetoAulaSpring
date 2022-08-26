@@ -24,21 +24,19 @@ public class AlunoService {
 		return repo.save(aluno);
 	}
 	
-//	public Object buscarId(Integer id) {
-//		return repo.findById(id);
-//	}
-	
 	public Aluno buscarPorId(Integer id) throws ObjectNotFoundException{
 		Optional<Aluno> aluno = repo.findById(id);
 		return aluno.orElseThrow(() -> new ObjectNotFoundException(1L, "Aluno nao encontrado"));
 	}
 	
-//	public void deleteById(Integer id) {
-//		repo.deleteById(id);
-//	}
-	
 	public void deletar(Integer id) {
 		repo.deleteById(id);
 	}
-	
+
+	public Aluno salvarAlteracao(Aluno alunoAlterado){
+		Aluno aluno = buscarPorId(alunoAlterado.getId());
+		aluno.setNome(alunoAlterado.getNome());
+		return salvar(aluno);
+	}
+
 }
