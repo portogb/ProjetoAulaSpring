@@ -11,10 +11,12 @@ import org.springframework.stereotype.Component;
 
 import br.com.senac.entity.Aluno;
 import br.com.senac.entity.Curso;
+import br.com.senac.entity.Professor;
 import br.com.senac.entity.Turma;
 //import br.com.senac.repository.AlunoRepository;
 import br.com.senac.service.AlunoService;
 import br.com.senac.service.CursoService;
+import br.com.senac.service.ProfessorService;
 import br.com.senac.service.TurmaService;
 
 @Component
@@ -28,6 +30,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 
 	@Autowired
 	CursoService cursoService;
+
+	@Autowired
+	ProfessorService professorService;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -113,6 +118,33 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		cursoService.salvarAlteracao(cursoAlterado);
 
 		//cursoService.deletar(1);
+
+		//PROFESSOR
+		Professor professor1 = new Professor();
+		professor1.setNome("Jesus");
+		Professor professor2 = new Professor();
+		professor2.setNome("Leonardo");
+		Professor professor3 = new Professor();
+		professor3.setNome("Bruno");
+
+		professorService.salvar(professor1);
+		professorService.salvar(professor2);
+		professorService.salvar(professor3);
+
+		List<Professor> listaProfessores = professorService.buscarTodosProfessores();
+		for (Professor professor : listaProfessores) {
+			System.out.println(professor.getNome());
+		}
+
+		Professor professor = professorService.buscarPorId(1);
+		System.out.println(professor.getNome());
+
+		Professor professorAlterado = new Professor();
+		professorAlterado.setId(1);
+		professorAlterado.setNome("Junior");
+		professorService.salvarAlteracao(professorAlterado);
+
+		//professorService.deletar(1);
 	}
 	
 }

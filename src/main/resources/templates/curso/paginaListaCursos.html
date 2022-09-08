@@ -27,9 +27,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="aluno : ${alunos}">
-                                <td th:text="${aluno.id}"></td>
-                                <td th:text="${aluno.nome}"></td>
+                            <tr th:each="curso : ${cursos}">
+                                <td th:text="${curso.id}"></td>
+                                <td th:text="${curso.nome}"></td>
                                 <td>
                                     <div class="btn-group pull-right">
                                         <a class="btn btn-sm btn-primary">ALTERAR</a>

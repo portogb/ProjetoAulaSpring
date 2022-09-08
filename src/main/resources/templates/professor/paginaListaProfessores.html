@@ -14,7 +14,7 @@
     <div class="container">
         <div class="panel-default">
             <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Listagem de Alunos</h1>
+                <h1 class="h4 text-gray-900 mb-4">Listagem de Professores</h1>
             </div>
             <div class="panel-body">
                 <div class="table-responsible">
@@ -27,9 +27,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="aluno : ${alunos}">
-                                <td th:text="${aluno.id}"></td>
-                                <td th:text="${aluno.nome}"></td>
+                            <tr th:each="professor : ${professores}">
+                                <td th:text="${professor.id}"></td>
+                                <td th:text="${professor.nome}"></td>
                                 <td>
                                     <div class="btn-group pull-right">
                                         <a class="btn btn-sm btn-primary">ALTERAR</a>
