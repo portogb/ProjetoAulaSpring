@@ -29,11 +29,11 @@
                         <tbody>
                             <tr th:each="aluno : ${alunos}">
                                 <td th:text="${aluno.id}"></td>
-                                <td th:text="${aluno.nome}"></td>
+                                <td th:text="${aluno.nome}"></td>                               
                                 <td>
                                     <div class="btn-group pull-right">
-                                        <a class="btn btn-sm btn-primary">ALTERAR</a>
-                                        <a class="delete btn btn-sm btn-danger">EXCLUIR</a>
+                                        <a class="btn btn-sm btn-primary" th:href="@{/aluno/paginaAlterar/{idAluno}(idAluno=${aluno.id})}" >Alterar</a>
+                                        <a class="delete btn btn-sm btn-danger" th:href="@{/aluno/excluir/{idAluno}(idAluno=${aluno.id})}" >Excluir</a>
                                     </div>
                                 </td>
                             </tr>

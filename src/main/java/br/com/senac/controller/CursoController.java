@@ -3,6 +3,7 @@ package br.com.senac.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,4 +38,22 @@ public class CursoController {
         return listarTodosCursos();
     }
 
+    @GetMapping("/excluir/{id}")
+    public ModelAndView excluirCurso(@PathVariable("id") Integer id){
+        cursoService.deletar(id);
+        return listarTodosCursos();
+    }
+
+    @GetMapping("/paginaAlterar/{id}")
+    public ModelAndView alterarCurso(@PathVariable("id") Integer id){
+        ModelAndView mv = new ModelAndView("curso/alterarCurso");
+        mv.addObject("curso", cursoService.buscarPorId(id));
+        return mv;
+    }
+
+    @PostMapping("/salvarAlteracao")
+    public ModelAndView alterar(Curso cursoAlterado){
+        cursoService.salvarAlteracao(cursoAlterado);
+        return listarTodosCursos();
+    }
 }

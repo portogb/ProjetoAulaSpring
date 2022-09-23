@@ -38,5 +38,4 @@ public class AlunoService {
 		aluno.setNome(alunoAlterado.getNome());
 		return salvar(aluno);
 	}
-
 }

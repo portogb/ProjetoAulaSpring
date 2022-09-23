@@ -14,12 +14,16 @@
     <div class="container">
         <div class="panel-default">
             <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Cadastar Alunos</h1>
+                <h1 class="h4 text-gray-900 mb-4">Cadastar Cursos</h1>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" th:action="@{/aluno/salvar}" th:object="${aluno}" method="post" style="margin: 10px;">
+                <form class="form-horizontal" th:action="@{/curso/salvarAlteracao}" th:object="${curso}" method="post" style="margin: 10px;">
                     <div class="form-group">
                         <fieldset>
+                            <div class="form-group row">
+                                <label>Id</label>
+                                <input type="text" class="form-control input-sm" th:field="*{id}" readonly="readonly"/>
+                            </div>
                             <div class="form-group row">
                                 <label>Nome</label>
                                 <input type="text" class="form-control input-sm" th:field="*{nome}" placeholder="Informe o nome" maxlength="50"/>
@@ -27,7 +31,7 @@
                         </fieldset>
                         <div align="center">
                             <button type="submit" class="btn btn-sm btn-success">Salvar</button>
-                            <a type="reset" class="btn btn-sm btn-danger" href="/aluno/listarAlunos">Cancelar</a>
+                            <a type="reset" class="btn btn-sm btn-danger" href="/curso/listarCursos">Cancelar</a>
                     </div>
                 </form>
             </div>
