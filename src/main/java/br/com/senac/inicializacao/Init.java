@@ -13,6 +13,7 @@ import br.com.senac.entity.Aluno;
 import br.com.senac.entity.Curso;
 import br.com.senac.entity.Professor;
 import br.com.senac.entity.Turma;
+import br.com.senac.repository.ProfessorRepository;
 //import br.com.senac.repository.AlunoRepository;
 import br.com.senac.service.AlunoService;
 import br.com.senac.service.CursoService;
@@ -33,6 +34,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 
 	@Autowired
 	ProfessorService professorService;
+
+	@Autowired
+	ProfessorRepository professorRepository;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -100,6 +104,30 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		Curso curso3 = new Curso();
 		curso3.setNome("Spring Boot");
 
+		Professor p1 = new Professor();
+		p1.setNome("Lucas");
+
+		Professor p2 = new Professor();
+		p2.setNome("Joao");
+
+		Professor p3 = new Professor();
+		p3.setNome("Claudio");
+
+		Professor p4 = new Professor();
+		p4.setNome("Junior");
+
+		professorService.salvar(p1);
+		professorService.salvar(p2);
+		professorService.salvar(p3);
+		professorService.salvar(p4);
+
+		// outra opcao
+		// professorRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+		curso1.setProfessor(p1);
+		curso2.setProfessor(p3);
+		curso3.setProfessor(p2);
+
 		cursoService.salvar(curso1);
 		cursoService.salvar(curso2);
 		cursoService.salvar(curso3);
@@ -120,29 +148,29 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		//cursoService.deletar(1);
 
 		//PROFESSOR
-		Professor professor1 = new Professor();
-		professor1.setNome("Jesus");
-		Professor professor2 = new Professor();
-		professor2.setNome("Leonardo");
-		Professor professor3 = new Professor();
-		professor3.setNome("Bruno");
+		// Professor professor1 = new Professor();
+		// professor1.setNome("Jesus");
+		// Professor professor2 = new Professor();
+		// professor2.setNome("Leonardo");
+		// Professor professor3 = new Professor();
+		// professor3.setNome("Bruno");
 
-		professorService.salvar(professor1);
-		professorService.salvar(professor2);
-		professorService.salvar(professor3);
+		// professorService.salvar(professor1);
+		// professorService.salvar(professor2);
+		// professorService.salvar(professor3);
 
-		List<Professor> listaProfessores = professorService.buscarTodosProfessores();
-		for (Professor professor : listaProfessores) {
-			System.out.println(professor.getNome());
-		}
+		// List<Professor> listaProfessores = professorService.buscarTodosProfessores();
+		// for (Professor professor : listaProfessores) {
+		// 	System.out.println(professor.getNome());
+		// }
 
-		Professor professor = professorService.buscarPorId(1);
-		System.out.println(professor.getNome());
+		// Professor professor = professorService.buscarPorId(1);
+		// System.out.println(professor.getNome());
 
-		Professor professorAlterado = new Professor();
-		professorAlterado.setId(1);
-		professorAlterado.setNome("Junior");
-		professorService.salvarAlteracao(professorAlterado);
+		// Professor professorAlterado = new Professor();
+		// professorAlterado.setId(1);
+		// professorAlterado.setNome("Junior");
+		// professorService.salvarAlteracao(professorAlterado);
 
 		//professorService.deletar(1);
 	}
