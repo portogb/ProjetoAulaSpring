@@ -9,11 +9,13 @@ import javax.persistence.Id;
 
 @Entity
 public class Turma implements Serializable{
+    
     private static final long serialVersionUID = 6631457942567742474L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
     private String nome;
 
     public Integer getId() {

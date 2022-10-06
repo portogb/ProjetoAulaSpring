@@ -29,6 +29,19 @@
                                 <label>Nome</label>
                                 <input type="text" class="form-control input-sm" th:field="*{nome}" placeholder="Informe o nome" maxlength="50"/>
                             </div>
+                            <div class="form-group row">
+                                <label>Turma</label>
+                                <select class="form-control" th:field="*{turma}">
+                                    <option value="">Selecione a turma</option>
+                                    <option th:each="objTurma : ${listaTurma}" th:value="${objTurma.id}" th:text="${objTurma.nome}"></option>
+                                </select>
+                            </div>
+                            <!-- <div class="form-group row">
+                                <label>Turmas</label>
+                                <select class="form-control" th:field="*{turma}"></select>
+                                <option>Selecione uma turma</option>
+                                <option th:each="turma : ${turmas}" th:value="${turma.id}" th:text="${turma.nome}" ></option>
+                            </div> -->
                         </fieldset>
                         <div align="center">
                             <button type="submit" class="btn btn-sm btn-success">Salvar</button>

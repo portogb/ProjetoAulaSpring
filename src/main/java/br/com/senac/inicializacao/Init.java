@@ -2,7 +2,7 @@ package br.com.senac.inicializacao;
 
 import java.util.List;
 
-//import java.util.Arrays;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -14,7 +14,7 @@ import br.com.senac.entity.Curso;
 import br.com.senac.entity.Professor;
 import br.com.senac.entity.Turma;
 import br.com.senac.repository.ProfessorRepository;
-//import br.com.senac.repository.AlunoRepository;
+import br.com.senac.repository.AlunoRepository;
 import br.com.senac.service.AlunoService;
 import br.com.senac.service.CursoService;
 import br.com.senac.service.ProfessorService;
@@ -24,79 +24,94 @@ import br.com.senac.service.TurmaService;
 public class Init implements ApplicationListener<ContextRefreshedEvent>{
 
 	@Autowired
-	AlunoService alunoService;
+	private AlunoService alunoService;
 	
 	@Autowired
-	TurmaService turmaService;
+	private TurmaService turmaService;
 
 	@Autowired
-	CursoService cursoService;
+	private CursoService cursoService;
 
 	@Autowired
-	ProfessorService professorService;
+	private ProfessorService professorService;
 
-	@Autowired
-	ProfessorRepository professorRepository;
+	// @Autowired
+	// private ProfessorRepository professorRepository;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		//ALUNO
+
+		Turma t1 = new Turma();
+		t1.setNome("turma 1");
+		Turma t2 = new Turma();
+		t2.setNome("turma 2");
+		Turma t3 = new Turma();
+		t3.setNome("turma 3");
+
+		turmaService.salvar(t1);
+		turmaService.salvar(t2);
+		turmaService.salvar(t3);
+
 		Aluno aluno1 = new Aluno();
 		aluno1.setNome("Lucas");
+		aluno1.setTurma(t3);
 		
 		Aluno aluno2 = new Aluno();
 		aluno2.setNome("Arthur");
+		aluno2.setTurma(t3);
 		
 		Aluno aluno3 = new Aluno();
 		aluno3.setNome("Jose");
+		aluno3.setTurma(t1);
 		
 		alunoService.salvar(aluno1);
 		alunoService.salvar(aluno2);
 		alunoService.salvar(aluno3);
 		
-		List<Aluno> listaAlunos = alunoService.buscarTodosAlunos();
-		for (Aluno aluno : listaAlunos) {
-			System.out.println(aluno.getNome());
-		}
+		// List<Aluno> listaAlunos = alunoService.buscarTodosAlunos();
+		// for (Aluno aluno : listaAlunos) {
+		// 	System.out.println(aluno.getNome());
+		// }
 		
-		Aluno aluno4 = alunoService.buscarPorId(1);
-		System.out.println(aluno4.getNome());
+		// Aluno aluno4 = alunoService.buscarPorId(1);
+		// System.out.println(aluno4.getNome());
 
 		//alunoService.deletar(3);
 		
-		Aluno alunoAlterado = new Aluno();
-		alunoAlterado.setId(1);
-		alunoAlterado.setNome("Lucas Silva");
-		alunoService.salvarAlteracao(alunoAlterado);
+		// Aluno alunoAlterado = new Aluno();
+		// alunoAlterado.setId(1);
+		// alunoAlterado.setNome("Lucas Silva");
+		// alunoService.salvarAlteracao(alunoAlterado);
 
-		//TURMA
-		Turma turma1 = new Turma();
-		turma1.setNome("2020.1N");
-		Turma turma2 = new Turma();
-		turma2.setNome("2020.2N");
-		Turma turma3 = new Turma();
-		turma3.setNome("2021.1N");
+		// TURMA
+		// Turma turma1 = new Turma();
+		// turma1.setNome("2020.1N");
+		// Turma turma2 = new Turma();
+		// turma2.setNome("2020.2N");
+		// Turma turma3 = new Turma();
+		// turma3.setNome("2021.1N");
 
-		turmaService.salvar(turma1);
-		turmaService.salvar(turma2);
-		turmaService.salvar(turma3);
+		// turmaService.salvar(turma1);
+		// turmaService.salvar(turma2);
+		// turmaService.salvar(turma3);
 
-		List<Turma> listaTurmas = turmaService.buscarTodasTurmas();
-		for (Turma turma : listaTurmas) {
-			System.out.println(turma.getNome());
-		}
+		// List<Turma> listaTurmas = turmaService.buscarTodasTurmas();
+		// for (Turma turma : listaTurmas) {
+		// 	System.out.println(turma.getNome());
+		// }
 
-		Turma turma = turmaService.buscarPorId(1);
-		System.out.println(turma.getNome());
+		// Turma turma = turmaService.buscarPorId(1);
+		// System.out.println(turma.getNome());
 
-		Turma turmaAlterada = new Turma();
-		turmaAlterada.setId(1);
-		turmaAlterada.setNome("2021.2N");
-		turmaService.salvarAlteracao(turmaAlterada);
+		// Turma turmaAlterada = new Turma();
+		// turmaAlterada.setId(1);
+		// turmaAlterada.setNome("2021.2N");
+		// turmaService.salvarAlteracao(turmaAlterada);
 
-		//turmaService.deletar(1);
+		// turmaService.deletar(1);
 
-		//CURSO
+		// CURSO
 		Curso curso1 = new Curso();
 		curso1.setNome("NodeJs");
 		Curso curso2 = new Curso();
@@ -145,9 +160,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		cursoAlterado.setNome("JavaScript");
 		cursoService.salvarAlteracao(cursoAlterado);
 
-		//cursoService.deletar(1);
+		cursoService.deletar(1);
 
-		//PROFESSOR
+		// PROFESSOR
 		// Professor professor1 = new Professor();
 		// professor1.setNome("Jesus");
 		// Professor professor2 = new Professor();
@@ -172,7 +187,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		// professorAlterado.setNome("Junior");
 		// professorService.salvarAlteracao(professorAlterado);
 
-		//professorService.deletar(1);
+		// professorService.deletar(1);
 	}
 	
 }

@@ -36,6 +36,7 @@ public class AlunoService {
 	public Aluno salvarAlteracao(Aluno alunoAlterado){
 		Aluno aluno = buscarPorId(alunoAlterado.getId());
 		aluno.setNome(alunoAlterado.getNome());
+		aluno.setTurma(alunoAlterado.getTurma());
 		return salvar(aluno);
 	}
 }
