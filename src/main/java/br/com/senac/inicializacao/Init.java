@@ -10,12 +10,15 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import br.com.senac.entity.Aluno;
+import br.com.senac.entity.AlunoCurso;
+import br.com.senac.entity.Avaliacao;
 import br.com.senac.entity.Curso;
 import br.com.senac.entity.Professor;
 import br.com.senac.entity.Turma;
 import br.com.senac.repository.ProfessorRepository;
 import br.com.senac.repository.AlunoRepository;
 import br.com.senac.service.AlunoService;
+import br.com.senac.service.AvaliacaoService;
 import br.com.senac.service.CursoService;
 import br.com.senac.service.ProfessorService;
 import br.com.senac.service.TurmaService;
@@ -37,6 +40,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 
 	// @Autowired
 	// private ProfessorRepository professorRepository;
+
+	@Autowired
+	private AvaliacaoService avaliacaoService;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -110,21 +116,21 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		// cursoService.salvar(curso3);
 		// cursoService.salvar(curso4);
 
-		// Aluno aluno1 = new Aluno();
-		// aluno1.setNome("Lucas");
-		// aluno1.setTurma(t3);
+		Aluno aluno1 = new Aluno();
+		aluno1.setNome("Lucas");
+		aluno1.setTurma(t3);
 		
-		// Aluno aluno2 = new Aluno();
-		// aluno2.setNome("Arthur");
-		// aluno2.setTurma(t3);
+		Aluno aluno2 = new Aluno();
+		aluno2.setNome("Arthur");
+		aluno2.setTurma(t3);
 		
-		// Aluno aluno3 = new Aluno();
-		// aluno3.setNome("Jose");
-		// aluno3.setTurma(t1);
+		Aluno aluno3 = new Aluno();
+		aluno3.setNome("Jose");
+		aluno3.setTurma(t1);
 		
-		// alunoService.salvar(aluno1);
-		// alunoService.salvar(aluno2);
-		// alunoService.salvar(aluno3);
+		alunoService.salvar(aluno1);
+		alunoService.salvar(aluno2);
+		alunoService.salvar(aluno3);
 		
 		// List<Aluno> listaAlunos = alunoService.buscarTodosAlunos();
 		// for (Aluno aluno : listaAlunos) {
@@ -242,6 +248,19 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		// professorService.salvarAlteracao(professorAlterado);
 
 		// professorService.deletar(1);
+
+		// AVALIACAO
+
+		Avaliacao avaliacao1 = new Avaliacao();
+		
+		AlunoCurso alunoCurso1 = new AlunoCurso();
+		alunoCurso1.setAluno(aluno1);
+		alunoCurso1.setCurso(curso4);
+
+		avaliacao1.setAlunoCurso(alunoCurso1);
+		avaliacao1.setConceito("I");
+
+		avaliacaoService.save(avaliacao1);
 	}
 	
 }
