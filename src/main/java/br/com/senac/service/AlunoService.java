@@ -39,4 +39,9 @@ public class AlunoService {
 		aluno.setTurma(alunoAlterado.getTurma());
 		return salvar(aluno);
 	}
+
+	public Aluno buscaPorNome(String nome){
+		Aluno aluno = repo.findByNome(nome);
+		return aluno;
+	}
 }

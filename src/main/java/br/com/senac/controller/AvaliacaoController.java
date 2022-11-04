@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.senac.entity.Avaliacao;
@@ -32,7 +33,7 @@ public class AvaliacaoController {
         return mv;
     }
 
-    @GetMapping("/save")
+    @PostMapping("/save")
     public ModelAndView save(@ModelAttribute("avaliacao") Avaliacao avaliacao){
         avaliacao.getAlunoCurso().setAluno(alunoService.buscarPorId(avaliacao.getAlunoCurso().getAluno().getId()));
         avaliacao.getAlunoCurso().setCurso(cursoService.buscarPorId(avaliacao.getAlunoCurso().getCurso().getId()));
@@ -41,6 +42,4 @@ public class AvaliacaoController {
         mv.addObject("avaliacoes", avaliacaoService.findAll());
         return mv;
     }
-
-
 }

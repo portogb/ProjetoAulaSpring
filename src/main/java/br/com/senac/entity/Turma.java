@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Turma implements Serializable{
@@ -29,6 +31,9 @@ public class Turma implements Serializable{
         inverseJoinColumns = {@JoinColumn(name = "curso_id")} 
         )
     private List<Curso> cursos;
+
+    @OneToMany(mappedBy = "turma", fetch = FetchType.LAZY)
+    private List<Aluno> alunos;
 
     public Integer getId() {
         return id;
@@ -53,5 +58,16 @@ public class Turma implements Serializable{
     public void setCursos(List<Curso> cursos) {
         this.cursos = cursos;
     }
-    
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
 }
