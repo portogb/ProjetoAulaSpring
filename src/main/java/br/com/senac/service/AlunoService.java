@@ -44,4 +44,14 @@ public class AlunoService {
 		Aluno aluno = repo.findByNome(nome);
 		return aluno;
 	}
+
+	public List<Aluno> buscarAlunoComEndereco(){
+		List<Aluno> lista = repo.buscarAlunoComEndereco();
+		return lista;
+	}
+
+	public List<Aluno> buscarAlunoPeloNomeComEndereco(String nome){
+		List<Aluno> lista = repo.buscaAlunoPeloNome(nome);
+		return lista;
+	}
 }

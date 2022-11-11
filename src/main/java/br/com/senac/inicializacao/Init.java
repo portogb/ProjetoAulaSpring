@@ -203,11 +203,40 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		enderecoService.salvar(endereco3);
 		enderecoService.salvar(endereco4);
 
-		Aluno al1 = alunoService.buscaPorNome("Lucas");
+		// Aluno al1 = alunoService.buscaPorNome("Lucas");
 		
-		al1.getEnderecos().forEach((e) -> System.out.println("Rua: " + e.getRua() + " Numero: " + e.getNumero()));
+		// al1.getEnderecos().forEach((e) -> System.out.println("Rua: " + e.getRua() + " Numero: " + e.getNumero()));
+		
+		//FORMA 1
+		// List<Endereco> listaEnderecoAluno1 = enderecoService.buscar(aluno1);
 
+		// listaEnderecoAluno1.forEach((e) -> System.out.println("Rua " + e.getRua() + " Numero: " + e.getNumero() + " Bairro: " + e.getBairro()));
+
+		//FORMA 2
+		// List<Aluno> listaAlunoComEndereco = alunoService.buscarAlunoComEndereco();
+
+		// listaAlunoComEndereco.forEach(a -> a.getEnderecos()
+		// .forEach(end -> System.out.println("Aluno nome: " + end.getAluno().getNome()
+		// 	+ " Rua: " + end.getRua())));
+
+		List<Aluno> alunoComEndereco = alunoService.buscarAlunoPeloNomeComEndereco("Lucas");
 		
+		alunoComEndereco.forEach(a -> a.getEnderecos()
+		.forEach(end -> System.out.println("Aluno nome: " + end.getAluno().getNome()
+		+ " Rua: " + end.getRua())));
+
+		// Turma turma = turmaService.buscarListaAlunosTurma(3);
+
+		// List<Aluno> alunosDaTurma = turma.getAlunos();
+
+		// alunosDaTurma.forEach((aluno) -> System.out.println("Nome do aluno: " + aluno.getNome()));
+
+		Turma turma = turmaService.findTurmaByIdTurma(3);
+
+		List<Aluno> alunosDaTurma = turma.getAlunos();
+
+		alunosDaTurma.forEach((aluno) -> System.out.println("Nome do aluno: " + aluno.getNome()));
+		 
 		// List<Aluno> listaAlunos = alunoService.buscarTodosAlunos();
 		// for (Aluno aluno : listaAlunos) {
 		// 	System.out.println(aluno.getNome());

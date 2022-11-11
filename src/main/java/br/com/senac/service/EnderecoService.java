@@ -7,6 +7,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.senac.entity.Aluno;
 import br.com.senac.entity.Endereco;
 import br.com.senac.repository.EnderecoRepository;
 
@@ -45,4 +46,10 @@ public class EnderecoService {
         return salvar(endereco);
     }
 
+    public List<Endereco> buscar(Aluno aluno){
+        List<Endereco> objetoListEndereco = enderecoRepository
+        .findByAluno(aluno);
+
+        return objetoListEndereco;
+    }
 }
