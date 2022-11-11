@@ -13,13 +13,17 @@ import br.com.senac.entity.Aluno;
 import br.com.senac.entity.AlunoCurso;
 import br.com.senac.entity.Avaliacao;
 import br.com.senac.entity.Curso;
+import br.com.senac.entity.Endereco;
 import br.com.senac.entity.Professor;
 import br.com.senac.entity.Turma;
 import br.com.senac.repository.ProfessorRepository;
+import br.com.senac.repository.TurmaRepository;
 import br.com.senac.repository.AlunoRepository;
+import br.com.senac.repository.EnderecoRepository;
 import br.com.senac.service.AlunoService;
 import br.com.senac.service.AvaliacaoService;
 import br.com.senac.service.CursoService;
+import br.com.senac.service.EnderecoService;
 import br.com.senac.service.ProfessorService;
 import br.com.senac.service.TurmaService;
 
@@ -43,6 +47,12 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 
 	@Autowired
 	private AvaliacaoService avaliacaoService;
+
+	@Autowired
+	private TurmaRepository turmaRepository;
+
+	@Autowired
+	private EnderecoService enderecoService;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -127,11 +137,106 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		Aluno aluno3 = new Aluno();
 		aluno3.setNome("Jose");
 		aluno3.setTurma(t1);
+
+		Aluno aluno4 = new Aluno();
+		aluno4.setNome("Walter");
+		aluno4.setTurma(t3);
 		
 		alunoService.salvar(aluno1);
 		alunoService.salvar(aluno2);
 		alunoService.salvar(aluno3);
+		alunoService.salvar(aluno4);
+
+		// List<Turma> listaTurmas = turmaService.buscarTodasTurmas();
+
+		// for (Turma turma : listaTurmas) {
+		// 	System.out.println(turma.getNome());
+		// 	for(Aluno aluno : turma.getAlunos()){
+		// 		System.out.println(aluno.getNome());
+		// 	}
+		// }
+
+		// List<Turma> listarTurmas = turmaRepository.findAllByIdTurma(3);
+
+		// for(Turma turma : listarTurmas){
+		// 	for(Aluno aluno : turma.getAlunos()){
+		// 		System.out.println(aluno.getNome());
+		// 	}
+		// }
+
+		Endereco endereco1 = new Endereco();
+		endereco1.setRua("Rua Caxias");
+		endereco1.setNumero(4);
+		endereco1.setComplemento("Proximo a praca");
+		endereco1.setBairro("Jardim Caxias");
+		endereco1.setCep("2000010");
+
+
+		Endereco endereco2 = new Endereco();
+		endereco2.setRua("Rua Madureira");
+		endereco2.setNumero(8);
+		endereco2.setComplemento("Proximo ao calcadao");
+		endereco2.setBairro("Jardim Madureira");
+		endereco2.setCep("2000020");
+
+		Endereco endereco3 = new Endereco();
+		endereco3.setRua("Rua Sao Joao");
+		endereco3.setNumero(12);
+		endereco3.setComplemento("proximo ao parque");
+		endereco3.setBairro("Jardim Sao Joao");
+		endereco3.setCep("200030");
+
+		Endereco endereco4 = new Endereco();
+		endereco4.setRua("Rua Japeri");
+		endereco4.setNumero(16);
+		endereco4.setComplemento("proximo ao trem");
+		endereco4.setBairro("Jardim Japeri");
+		endereco4.setCep("200060");
+
+		endereco1.setAluno(aluno1);
+		endereco2.setAluno(aluno1);
+		endereco3.setAluno(aluno4);
+		endereco4.setAluno(aluno4);
+
+		enderecoService.salvar(endereco1);
+		enderecoService.salvar(endereco2);
+		enderecoService.salvar(endereco3);
+		enderecoService.salvar(endereco4);
+
+		// Aluno al1 = alunoService.buscaPorNome("Lucas");
 		
+		// al1.getEnderecos().forEach((e) -> System.out.println("Rua: " + e.getRua() + " Numero: " + e.getNumero()));
+		
+		//FORMA 1
+		// List<Endereco> listaEnderecoAluno1 = enderecoService.buscar(aluno1);
+
+		// listaEnderecoAluno1.forEach((e) -> System.out.println("Rua " + e.getRua() + " Numero: " + e.getNumero() + " Bairro: " + e.getBairro()));
+
+		//FORMA 2
+		// List<Aluno> listaAlunoComEndereco = alunoService.buscarAlunoComEndereco();
+
+		// listaAlunoComEndereco.forEach(a -> a.getEnderecos()
+		// .forEach(end -> System.out.println("Aluno nome: " + end.getAluno().getNome()
+		// 	+ " Rua: " + end.getRua())));
+
+		List<Aluno> alunoComEndereco = alunoService.buscarAlunoPeloNomeComEndereco("Lucas");
+		
+		alunoComEndereco.forEach(a -> a.getEnderecos()
+		.forEach(end -> System.out.println("Aluno nome: " + end.getAluno().getNome()
+		+ " Rua: " + end.getRua())));
+
+		// Turma turma = turmaService.buscarListaAlunosTurma(3);
+
+		// List<Aluno> alunosDaTurma = turma.getAlunos();
+
+		// alunosDaTurma.forEach((aluno) -> System.out.println("Nome do aluno: " + aluno.getNome()));
+
+		Turma turma = turmaService.findTurmaByIdTurma(3);
+
+		List<Aluno> alunosDaTurma = turma.getAlunos();
+
+		alunosDaTurma.forEach((aluno) -> System.out.println("Nome do aluno: " + aluno.getNome()));
+		 
 		// List<Aluno> listaAlunos = alunoService.buscarTodosAlunos();
 		// for (Aluno aluno : listaAlunos) {
 		// 	System.out.println(aluno.getNome());

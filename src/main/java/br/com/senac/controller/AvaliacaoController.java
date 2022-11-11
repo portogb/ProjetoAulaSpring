@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestMapping;
+=======
+>>>>>>> 16938973cd8ea545394b86ade0eca47371b6b712
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.senac.entity.Avaliacao;
@@ -44,5 +47,8 @@ public class AvaliacaoController {
         mv.addObject("avaliacoes", avaliacaoService.findAll());
         return mv;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 16938973cd8ea545394b86ade0eca47371b6b712
 }

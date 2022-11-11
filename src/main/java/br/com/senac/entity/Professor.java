@@ -1,9 +1,15 @@
 package br.com.senac.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Professor {
@@ -13,6 +19,10 @@ public class Professor {
     private Integer id;
     
     private String nome;
+
+    @OneToMany(mappedBy = "livro")
+    @Fetch(value = FetchMode.JOIN)
+    private List<Livro> livros;
 
     public Integer getId() {
         return id;

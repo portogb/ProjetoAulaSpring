@@ -39,4 +39,19 @@ public class AlunoService {
 		aluno.setTurma(alunoAlterado.getTurma());
 		return salvar(aluno);
 	}
+
+	public Aluno buscaPorNome(String nome){
+		Aluno aluno = repo.findByNome(nome);
+		return aluno;
+	}
+
+	public List<Aluno> buscarAlunoComEndereco(){
+		List<Aluno> lista = repo.buscarAlunoComEndereco();
+		return lista;
+	}
+
+	public List<Aluno> buscarAlunoPeloNomeComEndereco(String nome){
+		List<Aluno> lista = repo.buscaAlunoPeloNome(nome);
+		return lista;
+	}
 }
