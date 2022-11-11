@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+<html xmlns:th="http:www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -17,18 +17,18 @@
 
     <div class="container">
         <h3>Lançar nota</h3>
-        <form class="form-horizontal" th:action="@{/avaliacoes/save}" th:object="${avaliacao}" method="post" style="margin: 10px;">
+        <form th:action="@{/avaliacoes/save}" th:object="${avaliacao}" method="post">
             <div class="form-group">
                 <label for="alunos">Aluno:</label>
-                <select name="alunoCurso.aluno.alunoId" id="alunos" class="form-control">
-                    <option th:each="aluno : ${alunos}" th:value="${aluno.alunoId}" th:text="${aluno.nome}"></option>
+                <select name="alunoCurso.aluno.id" id="alunos" class="form-control">
+                    <option th:each="aluno : ${alunos}" th:value="${aluno.id}" th:text="${aluno.nome}"></option>
                 </select>
             </div>
             
             <div class="form-group">
                 <label for="cursos">Curso:</label>
-                <select name="alunoCurso.curso.cursoId" id="cursos" class="form-control">
-                    <option th:each="curso : ${cursos}" th:value="${curso.cursoId}" th:text="${curso.nome}"></option>
+                <select name="alunoCurso.curso.id" id="cursos" class="form-control">
+                    <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.nome}"></option>
                 </select>
             </div>
 
@@ -42,6 +42,7 @@
             </div>
         </form>
     </div>
+
 </body>
 
 </html>
