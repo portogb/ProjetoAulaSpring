@@ -38,4 +38,13 @@ public class ProfessorService {
 		professor.setNome(professorAlterado.getNome());
 		return salvar(professor);
 	}
+
+	public Professor buscaPorNome(String nome){
+		return professorRepository.findByNome(nome);
+	}
+
+	public List<Professor> buscaProfessorComLivro(){
+		List<Professor> list = professorRepository.findBook();
+		return list;
+	}
 }

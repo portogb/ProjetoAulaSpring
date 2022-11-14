@@ -32,4 +32,8 @@ public class LivroService {
         livroRepository.deleteById(id);
     }
 
+    public Livro buscaPorNome(String nome){
+        Livro livro = livroRepository.findByNome(nome);
+        return livro;
+    }
 }

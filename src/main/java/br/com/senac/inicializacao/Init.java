@@ -14,6 +14,7 @@ import br.com.senac.entity.AlunoCurso;
 import br.com.senac.entity.Avaliacao;
 import br.com.senac.entity.Curso;
 import br.com.senac.entity.Endereco;
+import br.com.senac.entity.Livro;
 import br.com.senac.entity.Professor;
 import br.com.senac.entity.Turma;
 import br.com.senac.repository.ProfessorRepository;
@@ -24,6 +25,7 @@ import br.com.senac.service.AlunoService;
 import br.com.senac.service.AvaliacaoService;
 import br.com.senac.service.CursoService;
 import br.com.senac.service.EnderecoService;
+import br.com.senac.service.LivroService;
 import br.com.senac.service.ProfessorService;
 import br.com.senac.service.TurmaService;
 
@@ -53,6 +55,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 
 	@Autowired
 	private EnderecoService enderecoService;
+
+	@Autowired
+	private LivroService livroService;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -67,7 +72,6 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		Curso curso4 = new Curso();
 		curso4.setNome("C");
 
-
 		Professor p1 = new Professor();
 		p1.setNome("Lucas");
 		Professor p2 = new Professor();
@@ -81,6 +85,32 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		professorService.salvar(p2);
 		professorService.salvar(p3);
 		professorService.salvar(p4);
+
+		Livro livro1 = new Livro();
+		livro1.setNome("Estrutura de dados");
+		livro1.setEditora("Novatec");
+		
+		Livro livro2 = new Livro();
+		livro2.setNome("Boas praticas em Java");
+		livro2.setEditora("Novatec");
+
+		Livro livro3 = new Livro();
+		livro3.setNome("Banco de dados");
+		livro3.setEditora("Pierson");
+
+		Livro livro4 = new Livro();
+		livro4.setNome("Engenharia de Software");
+		livro4.setEditora("Alta Books");
+
+		livro1.setProfessor(p4);
+		livro2.setProfessor(p4);
+		livro3.setProfessor(p2);
+		livro4.setProfessor(p1);
+
+		livroService.save(livro1);
+		livroService.save(livro2);
+		livroService.save(livro3);
+		livroService.save(livro4);
 
 		List<Curso> listaCursos1 =  new ArrayList<>();
 		listaCursos1.add(curso1);
@@ -203,11 +233,24 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		enderecoService.salvar(endereco3);
 		enderecoService.salvar(endereco4);
 
+		// EXERCICIO 1
+		// Professor pf1 = professorService.buscaPorNome("Junior");
+		// pf1.getLivros().forEach(l -> System.out.println("Professor: " + l.getProfessor().getNome() + " Livro: " + l.getNome()));
+
+		// EXERCICIO 2
+		// List<Professor> listaProfessorLivro = professorService.buscaProfessorComLivro();
+		// listaProfessorLivro.forEach(p -> p.getLivros()
+		// .forEach(l -> System.out.println("Professor: " + l.getProfessor().getNome()
+		// + " - Livro: " + l.getNome())));
+
+		// EXERCICIO 3
+		
+	
 		// Aluno al1 = alunoService.buscaPorNome("Lucas");
 		
 		// al1.getEnderecos().forEach((e) -> System.out.println("Rua: " + e.getRua() + " Numero: " + e.getNumero()));
 		
-		//FORMA 1
+		// FORMA 1
 		// List<Endereco> listaEnderecoAluno1 = enderecoService.buscar(aluno1);
 
 		// listaEnderecoAluno1.forEach((e) -> System.out.println("Rua " + e.getRua() + " Numero: " + e.getNumero() + " Bairro: " + e.getBairro()));
@@ -219,23 +262,25 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		// .forEach(end -> System.out.println("Aluno nome: " + end.getAluno().getNome()
 		// 	+ " Rua: " + end.getRua())));
 
-		List<Aluno> alunoComEndereco = alunoService.buscarAlunoPeloNomeComEndereco("Lucas");
+		// FORMA 3
+		// List<Aluno> alunoComEndereco = alunoService.buscarAlunoPeloNomeComEndereco("Lucas");
 		
-		alunoComEndereco.forEach(a -> a.getEnderecos()
-		.forEach(end -> System.out.println("Aluno nome: " + end.getAluno().getNome()
-		+ " Rua: " + end.getRua())));
+		// alunoComEndereco.forEach(a -> a.getEnderecos()
+		// .forEach(end -> System.out.println("Aluno nome: " + end.getAluno().getNome()
+		// + " Rua: " + end.getRua())));
 
+		// FORMA 4
 		// Turma turma = turmaService.buscarListaAlunosTurma(3);
 
 		// List<Aluno> alunosDaTurma = turma.getAlunos();
 
 		// alunosDaTurma.forEach((aluno) -> System.out.println("Nome do aluno: " + aluno.getNome()));
 
-		Turma turma = turmaService.findTurmaByIdTurma(3);
+		// Turma turma = turmaService.findTurmaByIdTurma(3);
 
-		List<Aluno> alunosDaTurma = turma.getAlunos();
+		// List<Aluno> alunosDaTurma = turma.getAlunos();
 
-		alunosDaTurma.forEach((aluno) -> System.out.println("Nome do aluno: " + aluno.getNome()));
+		// alunosDaTurma.forEach((aluno) -> System.out.println("Nome do aluno: " + aluno.getNome()));
 		 
 		// List<Aluno> listaAlunos = alunoService.buscarTodosAlunos();
 		// for (Aluno aluno : listaAlunos) {

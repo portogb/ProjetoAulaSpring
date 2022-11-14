@@ -3,6 +3,7 @@ package br.com.senac.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Professor {
     
     private String nome;
 
-    @OneToMany(mappedBy = "livro")
+    @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.JOIN)
     private List<Livro> livros;
 
@@ -40,4 +41,7 @@ public class Professor {
         this.nome = nome;
     }
 
+    public List<Livro> getLivros() {
+        return livros;
+    }
 }
